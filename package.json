@@ -1,0 +1,21 @@
+{
+  "name": "louie-sawyer-portfolio-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker for Louie Sawyer Portfolio",
+  "main": "worker/index.js",
+  "scripts": {
+    "build": "cd frontend && yarn build",
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "preview": "wrangler dev --remote"
+  },
+  "dependencies": {
+    "@cloudflare/kv-asset-handler": "^0.3.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
