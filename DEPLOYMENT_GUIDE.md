@@ -67,7 +67,7 @@ git push origin main
 
 4. **Environment Variables** (if needed):
    ```
-   NODE_VERSION: 18
+   NODE_VERSION: 20
    CI: false
    GENERATE_SOURCEMAP: false
    ```
