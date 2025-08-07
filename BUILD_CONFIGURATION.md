@@ -49,8 +49,8 @@ If you need to build locally for testing:
 
 ```bash
 cd frontend
-npm install
-npm run build
+yarn install
+yarn build
 ```
 
 The build will create optimized production files in `frontend/build/` directory.
