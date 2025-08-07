@@ -60,7 +60,7 @@ git push origin main
    ```
    Project name: louie-sawyer-portfolio
    Production branch: main
-   Build command: cd frontend && npm run build
+   Build command: cd frontend && yarn build
    Build output directory: frontend/build
    Root directory: (leave empty)
    ```
