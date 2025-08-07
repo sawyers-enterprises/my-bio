@@ -161,7 +161,7 @@ certifications: [
 1. **Frontend Only** (for content updates):
    ```bash
    cd frontend
-   npm start
+   yarn start
    ```
 
 2. **Full Stack** (if backend features are added later):
@@ -173,7 +173,7 @@ certifications: [
 
    # Terminal 2 - Frontend  
    cd frontend
-   npm start
+   yarn start
    ```
 
 ### Making Changes
