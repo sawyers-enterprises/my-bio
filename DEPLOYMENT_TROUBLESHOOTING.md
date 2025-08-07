@@ -1,5 +1,58 @@
 # GitHub Actions Deployment Troubleshooting
 
+## ✅ FIXED: Cloudflare Authentication Error (403)
+
+**Error Message:**
+```
+Cloudflare API returned non-200: 403
+API returned: {"success":false,"errors":[{"code":10000,"message":"Authentication error"}]}
+Error: Failed to get Pages project, API returned non-200
+```
+
+**Root Causes:**
+1. **Cloudflare Pages project doesn't exist yet**
+2. **API token has insufficient permissions**
+3. **Wrong account ID**
+
+**Solutions:**
+
+### Option 1: Create Cloudflare Pages Project First
+
+1. **Go to Cloudflare Dashboard** → **Pages**
+2. **Create a new project**:
+   - Click **"Create a project"**
+   - Choose **"Upload assets"** (temporary)
+   - Project name: **`louie-sawyer-portfolio`** (exact match)
+   - Upload any dummy file temporarily
+3. **Now GitHub Actions can deploy to existing project**
+
+### Option 2: Update API Token Permissions
+
+Create a **Custom API Token** with these permissions:
+```
+Token name: GitHub Pages Deploy
+Permissions:
+  - Account:Cloudflare Pages:Edit
+  - Zone:Zone:Read (optional, for custom domains)
+Account Resources: Include - Your Account
+Zone Resources: Include - All zones (if using custom domain)
+```
+
+**Important**: The token needs `Pages:Edit` permission to create projects.
+
+### Option 3: Use Wrangler CLI Method
+
+Alternative deployment using Wrangler CLI:
+```yaml
+- name: Deploy to Cloudflare Pages
+  run: |
+    cd frontend
+    npx wrangler pages deploy build --project-name=louie-sawyer-portfolio --compatibility-date=2024-01-01
+  env:
+    CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+```
+
 ## ✅ FIXED: Node.js Version Compatibility Error
 
 **Error Message:**
