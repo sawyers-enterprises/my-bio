@@ -57,12 +57,14 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           # Cloudflare Account ID
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          # Project name in Cloudflare Pages (must match your Pages project)
+          # Project name in Cloudflare Pages (will be created if doesn't exist)
           projectName: louie-sawyer-portfolio
           # Directory containing built files
           directory: frontend/build
           # Git info for deployment tracking
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          # Wrangler version
+          wranglerVersion: '3'
           
       # Optional: Add deployment status comment to PR
       - name: Add deployment status comment
