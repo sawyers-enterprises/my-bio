@@ -25,25 +25,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
-      # Setup Node.js environment
+      # Setup Node.js environment with Yarn caching
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
-          cache-dependency-path: frontend/package-lock.json
+          cache: 'yarn'
+          cache-dependency-path: frontend/yarn.lock
           
-      # Install frontend dependencies
+      # Install frontend dependencies using Yarn
       - name: Install dependencies
         run: |
           cd frontend
-          npm ci
+          yarn install --frozen-lockfile
           
       # Build the React application
       - name: Build application
         run: |
           cd frontend
-          npm run build
+          yarn build
         env:
           # Set production environment variables
           CI: false
