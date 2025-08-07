@@ -1,5 +1,30 @@
 # GitHub Actions Deployment Troubleshooting
 
+## ✅ FIXED: Node.js Version Compatibility Error
+
+**Error Message:**
+```
+error react-router-dom@7.5.1: The engine "node" is incompatible with this module. Expected version ">=20.0.0". Got "18.20.8"
+```
+
+**Root Cause:** 
+The GitHub Actions workflow was using Node.js 18, but `react-router-dom@7.5.1` requires Node.js 20+.
+
+**Solution Applied:**
+Updated `.github/workflows/deploy.yml` to use Node.js 20:
+
+### Before (Broken):
+```yaml
+env:
+  NODE_VERSION: '18'
+```
+
+### After (Fixed):
+```yaml
+env:
+  NODE_VERSION: '20'
+```
+
 ## ✅ FIXED: Cache Dependencies Error
 
 **Error Message:**
