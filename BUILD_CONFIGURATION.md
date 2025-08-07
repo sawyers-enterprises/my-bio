@@ -15,7 +15,7 @@ Add these scripts to `frontend/package.json` if not already present:
     "eject": "react-scripts eject"
   },
   "engines": {
-    "node": ">=18.0.0"
+    "node": ">=20.0.0"
   }
 }
 ```
