@@ -25,7 +25,7 @@ A modern, professional portfolio website showcasing 12+ years of infrastructure 
 
 1. **GitHub Account** - [Sign up here](https://github.com/signup) if you don't have one
 2. **VSCode** - [Download here](https://code.visualstudio.com/) (free code editor)
-3. **Node.js** - [Download here](https://nodejs.org/) (choose LTS version)
+3. **Node.js** - [Download here](https://nodejs.org/) (choose LTS version 20+)
 4. **Git** - [Download here](https://git-scm.com/) (version control)
 
 ### Initial Setup (One-time only)
