@@ -93,13 +93,15 @@ git push origin main
      ```
      Token name: GitHub Pages Deploy
      Permissions:
+       - Account:Cloudflare Pages:Edit (REQUIRED)
        - Zone:Zone:Read (if using custom domain)
        - Zone:Page Rules:Edit (if using custom domain)  
-       - Account:Cloudflare Pages:Edit
      Account Resources: Include - Your Account
      Zone Resources: Include - All zones (if using custom domain)
      ```
    - **Copy the token** (you'll only see it once!)
+   
+   **⚠️ IMPORTANT**: The token MUST have `Cloudflare Pages:Edit` permission to create/deploy projects.
 
 ### 4. Add Secrets to GitHub
 
