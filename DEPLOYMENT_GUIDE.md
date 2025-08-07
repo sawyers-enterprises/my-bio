@@ -46,24 +46,29 @@ git push origin main
 
 ### 2. Create Pages Project
 
+**IMPORTANT: Create the project FIRST before GitHub Actions can deploy to it.**
+
 1. **In Cloudflare Dashboard**:
    - Go to **Pages** (left sidebar)
    - Click **"Create a project"**
-   - Choose **"Connect to Git"**
+   - Choose **"Upload assets"** (we'll switch to Git later)
 
-2. **Connect GitHub**:
-   - Click **"Connect GitHub"**
-   - Authorize Cloudflare to access your repositories
-   - Select your repository: `louie-sawyer-portfolio`
-
-3. **Configure Build Settings**:
+2. **Project Setup**:
    ```
    Project name: louie-sawyer-portfolio
-   Production branch: main
-   Build command: cd frontend && yarn build
-   Build output directory: frontend/build
-   Root directory: (leave empty)
    ```
+   - Upload any dummy file (like a simple index.html)
+   - Click **"Create project"**
+
+3. **Switch to Git Integration** (after creation):
+   - Go to project settings
+   - Click **"Connect to Git"**
+   - Choose your GitHub repository
+   - Configure build settings:
+     ```
+     Build command: cd frontend && yarn build
+     Build output directory: frontend/build
+     ```
 
 4. **Environment Variables** (if needed):
    ```
