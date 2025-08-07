@@ -48,12 +48,12 @@ A modern, professional portfolio website showcasing 12+ years of infrastructure 
 3. **Install Dependencies**:
    ```bash
    cd frontend
-   npm install
+   yarn install
    ```
 
 4. **Start Development Server**:
    ```bash
-   npm start
+   yarn start
    ```
    Your website will open at `http://localhost:3000`
 
