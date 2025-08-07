@@ -33,7 +33,7 @@ NODE_ENV=production         # Optimizes build for production
 ## Build Process
 
 1. **GitHub Actions triggers** on push to main branch
-2. **Node.js 18 is installed**
+2. **Node.js 20 is installed**
 3. **Dependencies are installed** with `yarn install --frozen-lockfile` in frontend directory  
 4. **Production build runs** with `yarn build`
 5. **Built files** in `frontend/build/` are deployed to Cloudflare Pages
