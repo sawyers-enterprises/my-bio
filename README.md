@@ -298,8 +298,9 @@ Simply replace the text in the `bio` field under `personalInfo`.
 
 ### Website Not Loading
 - Check if Node.js is installed: `node --version`
+- Check if Yarn is installed: `yarn --version`
 - Make sure you're in the `frontend` folder
-- Run `npm install` then `npm start`
+- Run `yarn install` then `yarn start`
 
 ### Changes Not Showing
 - Save all files (Ctrl+Shift+S)
