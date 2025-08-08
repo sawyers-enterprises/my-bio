@@ -125,8 +125,8 @@ If your domain (e.g., `louie.sawyer-enterprises.co.uk`) is already managed by Cl
    - Go to your Pages project
    - Click **"Custom domains"**
    - Click **"Set up a custom domain"**
-   - Enter your domain: `louiesawyer.com`
-   - Add www subdomain: `www.louiesawyer.com`
+   - Enter your domain: `louie.sawyer-enterprises.co.uk`
+   - Add alternative domain: `louie.sawyer-enterprises.uk`
    - Click **"Continue"**
    - Cloudflare will automatically create DNS records
 
