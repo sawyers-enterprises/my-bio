@@ -55,10 +55,32 @@ jobs:
           echo "Build contents:"
           find frontend/build -type f | head -10
           
+      # Verify build output and file locations
+      - name: Verify build output and structure
+        run: |
+          echo "=== Current directory ==="
+          pwd
+          
+          echo "=== Root directory contents ==="
+          ls -la
+          
+          echo "=== Frontend build directory ==="
+          ls -la frontend/build/ || echo "Build directory not found"
+          
+          echo "=== Worker directory ==="
+          ls -la worker/
+          
+          echo "=== Wrangler config ==="
+          cat wrangler.toml
+          
       # Deploy to Cloudflare Workers with custom domains
       - name: Deploy Worker to Custom Domains
+        working-directory: .
         run: |
-          # Deploy with custom routes - no workers.dev needed
+          echo "=== Deploying from directory ==="
+          pwd
+          
+          echo "=== Running wrangler deploy ==="
           wrangler deploy --compatibility-date 2024-01-01
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
