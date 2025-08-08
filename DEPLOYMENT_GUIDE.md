@@ -268,7 +268,7 @@ Cloudflare automatically provides:
 - **Image optimisation**: Automatic image compression and WebP conversion
 - **Minification**: Automatic CSS, JS, and HTML minification  
 - **Caching**: Smart caching for faster load times
-- **Mobile optimization**: Optimized delivery for mobile devices
+- **Mobile optimisation**: Optimised delivery for mobile devices
 
 ## 🆘 Troubleshooting
 
