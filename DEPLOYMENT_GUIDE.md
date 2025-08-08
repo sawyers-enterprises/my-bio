@@ -141,11 +141,11 @@ If your domain is with another provider (GoDaddy, Namecheap, etc.):
 2. **In your domain provider's dashboard**:
    ```
    Type: CNAME
-   Name: @ (or leave empty for root domain)
+   Name: louie
    Value: louie-sawyer-portfolio.pages.dev
 
    Type: CNAME  
-   Name: www
+   Name: louie
    Value: louie-sawyer-portfolio.pages.dev
    ```
 
