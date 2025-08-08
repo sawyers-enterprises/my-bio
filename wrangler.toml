@@ -10,7 +10,7 @@ ENVIRONMENT = "production"
 [site]
 bucket = "./frontend/build"
 
-# Routes for custom domains - this is what Cloudflare needs
+# Routes for custom domains - MUST be at root level, not inside [site]
 routes = [
   { pattern = "louie.sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
   { pattern = "louie.sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" }
