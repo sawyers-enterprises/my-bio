@@ -227,7 +227,7 @@ louie-sawyer-portfolio/
         └── deploy.yml       # Auto-deployment
 ```
 
-## 🎨 Customization Guide
+## 🎨 Customisation Guide
 
 ### Changing Colors
 
