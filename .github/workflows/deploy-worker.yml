@@ -49,6 +49,13 @@ jobs:
           CI: false
           GENERATE_SOURCEMAP: false
           
+      # Verify build output
+      - name: Verify build output
+        run: |
+          ls -la frontend/build/
+          echo "Build contents:"
+          find frontend/build -type f | head -10
+          
       # Deploy to Cloudflare Workers using Wrangler
       - name: Deploy to Cloudflare Workers
         run: |
