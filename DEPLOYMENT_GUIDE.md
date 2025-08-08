@@ -171,7 +171,7 @@ This gives you full control and better performance:
    - In Cloudflare DNS → Add record:
    ```
    Type: CNAME
-   Name: @ 
+   Name: louie 
    Target: louie-sawyer-portfolio.pages.dev
    ```
 
