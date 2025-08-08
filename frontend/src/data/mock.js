@@ -6,7 +6,7 @@ export const mockData = {
     title: "Infrastructure Engineer",
     experience: "12+ Years",
     location: "United Kingdom",
-    email: "louie.sawyer@email.com",
+    email: "louie@sawyer-enterprises.co.uk",
     phone: "+44 7XXX XXX XXX",
     linkedIn: "https://linkedin.com/in/louie-sawyer", // To be updated later
     bio: "As a new father and a home-owner my career is critical to our lifestyle. I'm looking to cleanly demonstrate my skills, experience and aptitude towards the profession. I've covered everything from service-desk support (ITIL) functions, right through to server deployment/configuration. Got several years experience in networking including obtaining my CCNA. I studied the Just-IT programme too.",
