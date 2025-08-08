@@ -326,7 +326,7 @@ Simply replace the text in the `bio` field under `personalInfo`.
 
 ### Blog Section
 - Add a blog for technical articles
-- SEO optimization
+- SEO optimisation
 - Social media integration
 
 ### Analytics
