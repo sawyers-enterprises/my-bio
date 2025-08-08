@@ -135,7 +135,7 @@ projects: [
 certifications: [
   {
     name: "Your Certification Name", // ← Update
-    issuer: "Issuing Organization", // ← Update
+    issuer: "Issuing Organisation", // ← Update
     year: "2024", // ← Update
     status: "Active" // ← Update
   },
