@@ -56,7 +56,7 @@ export const mockData = {
       achievements: [
         "Deployed secure network infrastructure for 50+ client sites",
         "Achieved CCNA certification and trained junior team members",
-        "Improved network performance by 60% through optimization projects"
+        "Improved network performance by 60% through optimisation projects"
       ]
     },
     {
