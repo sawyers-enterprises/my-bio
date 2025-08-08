@@ -119,7 +119,7 @@ git push origin main
 
 ### Option 1: Domain Already on Cloudflare
 
-If your domain (e.g., `louiesawyer.com`) is already managed by Cloudflare:
+If your domain (e.g., `louie.sawyer-enterprises.co.uk`) is already managed by Cloudflare:
 
 1. **In Cloudflare Pages**:
    - Go to your Pages project
