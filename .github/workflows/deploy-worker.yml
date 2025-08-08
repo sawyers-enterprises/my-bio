@@ -34,6 +34,11 @@ jobs:
         run: |
           yarn install --frozen-lockfile
           
+      # Verify wrangler installation
+      - name: Verify Wrangler
+        run: |
+          npx wrangler --version
+          
       # Build React frontend
       - name: Build frontend
         run: |
