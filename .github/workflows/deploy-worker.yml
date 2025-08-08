@@ -56,15 +56,15 @@ jobs:
           find frontend/build -type f | head -10
           
       # Register workers.dev subdomain if needed
-      - name: Register workers.dev subdomain
+      - name: Setup Workers.dev deployment
         run: |
-          # Try to create a subdomain - this will fail gracefully if it already exists
-          wrangler subdomain create louie-sawyer-portfolio || echo "Subdomain may already exist or registration not needed"
+          # Check if we can deploy to workers.dev by trying to register subdomain
+          wrangler whoami
           
       # Deploy to Cloudflare Workers using Wrangler
-      - name: Deploy to Cloudflare Workers
+      - name: Deploy to Cloudflare Workers  
         run: |
-          wrangler deploy --compatibility-date 2024-01-01
+          wrangler deploy --name louie-sawyer-portfolio --compatibility-date 2024-01-01
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
