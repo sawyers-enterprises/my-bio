@@ -55,15 +55,14 @@ jobs:
           echo "Build contents:"
           find frontend/build -type f | head -10
           
-      # Register workers.dev subdomain if needed
-      - name: Setup Workers.dev deployment
+      # Register workers.dev subdomain automatically
+      - name: Setup Workers.dev subdomain
         run: |
           # Check authentication
           wrangler whoami
           
-          # Try to register a subdomain - this may fail if already exists, that's OK
-          echo "Attempting to register workers.dev subdomain..."
-          wrangler subdomain create louie-sawyer-portfolio 2>/dev/null || echo "Subdomain registration skipped (may already exist)"
+          # Force create subdomain in non-interactive mode
+          echo "louie-sawyer-portfolio" | wrangler subdomain create || echo "Subdomain creation attempted"
           
       # Deploy to Cloudflare Workers using Wrangler
       - name: Deploy to Cloudflare Workers  
