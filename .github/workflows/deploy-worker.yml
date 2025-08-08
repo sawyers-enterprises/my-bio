@@ -22,6 +22,19 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         
+      - name: Verify repository structure
+        run: |
+          echo "=== GitHub Actions working directory ==="
+          pwd
+          
+          echo "=== Repository root contents ==="
+          ls -la
+          
+          echo "=== Key files check ==="
+          echo "wrangler.toml exists: $(test -f wrangler.toml && echo 'YES' || echo 'NO')"
+          echo "worker/index-simple.js exists: $(test -f worker/index-simple.js && echo 'YES' || echo 'NO')"
+          echo "frontend/ exists: $(test -d frontend && echo 'YES' || echo 'NO')"
+        
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
