@@ -55,23 +55,26 @@ jobs:
           echo "Build contents:"
           find frontend/build -type f | head -10
           
-      # Deploy to Cloudflare Workers (no routing initially)
-      - name: Deploy Worker to Cloudflare  
+      # Deploy to Cloudflare Workers with custom domains
+      - name: Deploy Worker to Custom Domains
         run: |
-          # Deploy worker without any routing - will be available in dashboard
-          wrangler deploy --no-bundle --compatibility-date 2024-01-01
+          # Deploy with custom routes - no workers.dev needed
+          wrangler deploy --compatibility-date 2024-01-01
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           
-      - name: Deployment Complete
+      - name: Deployment Success
         run: |
-          echo "✅ Worker deployed successfully!"
-          echo "📋 Next steps:"
-          echo "1. Go to Cloudflare Dashboard > Workers & Pages"
-          echo "2. Find 'louie-sawyer-portfolio' worker"
-          echo "3. Add custom domain or workers.dev subdomain"
-          echo "4. Worker will be accessible at your chosen domain"
+          echo "🎉 WORKER DEPLOYED SUCCESSFULLY!"
+          echo "🌐 Portfolio should be live at:"
+          echo "   - https://louie.sawyer-enterprises.co.uk"
+          echo "   - https://louie.sawyer-enterprises.uk"
+          echo ""
+          echo "📋 If domains aren't working:"
+          echo "   1. Add domains to Cloudflare as zones"
+          echo "   2. Update nameservers at registrar"
+          echo "   3. Wait for DNS propagation"
           
       - name: Comment deployment status
         if: github.event_name == 'pull_request'
