@@ -265,7 +265,7 @@ Add Google Analytics to your portfolio:
 Cloudflare automatically provides:
 
 - **Global CDN**: Content served from 200+ locations worldwide
-- **Image optimization**: Automatic image compression and WebP conversion
+- **Image optimisation**: Automatic image compression and WebP conversion
 - **Minification**: Automatic CSS, JS, and HTML minification  
 - **Caching**: Smart caching for faster load times
 - **Mobile optimization**: Optimized delivery for mobile devices
