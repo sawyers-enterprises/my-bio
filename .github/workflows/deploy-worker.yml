@@ -27,7 +27,6 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'yarn'
-          cache-dependency-path: frontend/yarn.lock
           
       # Install root dependencies (including wrangler)
       - name: Install root dependencies
