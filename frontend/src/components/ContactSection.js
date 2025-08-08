@@ -167,7 +167,7 @@ const ContactSection = () => {
 
                 <div>
                   <label htmlFor="company" className="label-small block mb-3">
-                    COMPANY / ORGANIZATION
+                    COMPANY / ORGANISATION
                   </label>
                   <input
                     type="text"
