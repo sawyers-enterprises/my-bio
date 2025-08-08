@@ -58,13 +58,17 @@ jobs:
       # Register workers.dev subdomain if needed
       - name: Setup Workers.dev deployment
         run: |
-          # Check if we can deploy to workers.dev by trying to register subdomain
+          # Check authentication
           wrangler whoami
+          
+          # Try to register a subdomain - this may fail if already exists, that's OK
+          echo "Attempting to register workers.dev subdomain..."
+          wrangler subdomain create louie-sawyer-portfolio 2>/dev/null || echo "Subdomain registration skipped (may already exist)"
           
       # Deploy to Cloudflare Workers using Wrangler
       - name: Deploy to Cloudflare Workers  
         run: |
-          wrangler deploy --name louie-sawyer-portfolio --compatibility-date 2024-01-01
+          wrangler deploy --compatibility-date 2024-01-01
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
