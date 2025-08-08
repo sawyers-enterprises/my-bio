@@ -337,11 +337,9 @@ Simply replace the text in the `bio` field under `personalInfo`.
 ## 📞 Need Help?
 
 1. **Create a GitHub Issue**: Describe your problem with screenshots
-2. **Email Support**: Contact the developer who built this
+2. **Create a GitHub Issue**: Describe your problem with screenshots
 3. **Documentation**: Re-read this README for common solutions
 
 ---
-
-**Built with ❤️ for Louie Sawyer's Professional Success**
 
 *Last Updated: January 2025*
