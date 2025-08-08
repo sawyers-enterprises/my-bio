@@ -52,7 +52,7 @@ export const mockData = {
       title: "Network Infrastructure Specialist",
       company: "DataFlow Networks",
       period: "2017 - 2020", 
-      description: "Specialized in network design and implementation for medium to large enterprise clients.",
+      description: "Specialised in network design and implementation for medium to large enterprise clients.",
       achievements: [
         "Deployed secure network infrastructure for 50+ client sites",
         "Achieved CCNA certification and trained junior team members",
