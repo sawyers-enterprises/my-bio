@@ -12,7 +12,6 @@ on:
 
 env:
   NODE_VERSION: '20'
-  PYTHON_VERSION: '3.11'
 
 jobs:
   deploy:
@@ -30,10 +29,10 @@ jobs:
           cache: 'yarn'
           cache-dependency-path: frontend/yarn.lock
           
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ env.PYTHON_VERSION }}
+      # Install root dependencies (including wrangler)
+      - name: Install root dependencies
+        run: |
+          yarn install --frozen-lockfile
           
       # Build React frontend
       - name: Build frontend
@@ -45,17 +44,10 @@ jobs:
           CI: false
           GENERATE_SOURCEMAP: false
           
-      # Prepare Python backend for Workers deployment
-      - name: Prepare backend for Workers
-        run: |
-          cd backend
-          pip install -r requirements.txt
-          
       # Deploy to Cloudflare Workers using Wrangler
       - name: Deploy to Cloudflare Workers
         run: |
-          # Create wrangler.toml configuration
-          npx wrangler deploy
+          npx wrangler deploy --config wrangler.toml
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
