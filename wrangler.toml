@@ -1,5 +1,6 @@
 name = "louie-sawyer-portfolio"
 compatibility_date = "2024-01-01"
+main = "./worker/index.js"
 
 [env.production]
 name = "louie-sawyer-portfolio"
@@ -11,6 +12,19 @@ name = "louie-sawyer-portfolio-dev"
 [vars]
 ENVIRONMENT = "production"
 
+# Routes configuration - Supporting Louie's domains
+routes = [
+  { pattern = "louie.sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
+  { pattern = "louie.sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" },
+  { pattern = "sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
+  { pattern = "sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" }
+]
+
+# Static assets configuration for Workers Sites
+[site]
+bucket = "./frontend/build"
+entry-point = "./worker"
+
 # KV namespaces for data storage (if needed)
 # [[kv_namespaces]]
 # binding = "PORTFOLIO_KV"
@@ -21,27 +35,3 @@ ENVIRONMENT = "production"
 # binding = "PORTFOLIO_DB"
 # database_name = "portfolio-database"
 # database_id = "your-database-id"
-
-# Assets configuration
-[site]
-bucket = "./frontend/build"
-
-# Worker script configuration
-main = "./worker/index.js"
-
-# Routes configuration - Supporting Louie's domains
-routes = [
-  { pattern = "louie.sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
-  { pattern = "louie.sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" },
-  { pattern = "sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
-  { pattern = "sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" }
-]
-
-# Build configuration
-[build]
-command = "yarn build"
-cwd = "./frontend"
-
-# TypeScript support
-[build.upload]
-format = "modules"
