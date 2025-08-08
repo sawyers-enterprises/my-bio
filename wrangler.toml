@@ -2,12 +2,6 @@ name = "louie-sawyer-portfolio"
 compatibility_date = "2024-01-01"
 main = "./worker/index-simple.js"
 
-[env.production]
-name = "louie-sawyer-portfolio"
-
-[env.development]
-name = "louie-sawyer-portfolio-dev"
-
 # Environment variables for the worker
 [vars]
 ENVIRONMENT = "production"
@@ -17,6 +11,7 @@ ENVIRONMENT = "production"
 bucket = "./frontend/build"
 
 # Routes configuration - Supporting Louie's domains (commented out for initial deployment)
+# Uncomment these after the worker is deployed and domains are configured in Cloudflare
 # routes = [
 #   { pattern = "louie.sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
 #   { pattern = "louie.sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" },
