@@ -16,7 +16,7 @@ A modern, professional portfolio website showcasing 12+ years of infrastructure 
 - [Development Setup](#development-setup)
 - [Deployment](#deployment)
 - [GitHub Workflow](#github-workflow)
-- [Customization Guide](#customization-guide)
+- [Customisation Guide](#customisation-guide)
 - [Troubleshooting](#troubleshooting)
 
 ## 🎯 Quick Start for Louie
