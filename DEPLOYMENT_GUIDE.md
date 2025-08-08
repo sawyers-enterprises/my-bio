@@ -14,7 +14,7 @@ This guide will help Louie set up GitHub repository and configure automatic depl
    - **Visibility**: Public (recommended) or Private
    - **Initialize**: ✅ Add a README file
    - **Add .gitignore**: Node
-   - **Choose a license**: MIT License (recommended)
+   - **Choose a licence**: MIT Licence (recommended)
 
 ### 2. Clone and Push Your Code
 
