@@ -10,8 +10,11 @@ ENVIRONMENT = "production"
 [site]
 bucket = "./frontend/build"
 
-# No routes initially - worker will be created without public access
-# Routes can be added manually in Cloudflare dashboard after deployment
+# Routes for custom domains - this is what Cloudflare needs
+routes = [
+  { pattern = "louie.sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
+  { pattern = "louie.sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" }
+]
 
 # KV namespaces for data storage (if needed)
 # [[kv_namespaces]]
