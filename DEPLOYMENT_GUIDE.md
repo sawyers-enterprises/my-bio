@@ -260,7 +260,7 @@ Add Google Analytics to your portfolio:
    </script>
    ```
 
-## ⚡ Performance Optimizations
+## ⚡ Performance Optimisations
 
 Cloudflare automatically provides:
 
