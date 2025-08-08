@@ -29,14 +29,14 @@ jobs:
           cache: 'yarn'
           
       # Install root dependencies (including wrangler)
-      - name: Install root dependencies
+      - name: Install Wrangler CLI
         run: |
-          yarn install
+          npm install -g wrangler@latest
           
       # Verify wrangler installation
       - name: Verify Wrangler
         run: |
-          npx wrangler --version
+          wrangler --version
           
       # Build React frontend
       - name: Build frontend
