@@ -10,10 +10,10 @@
     "preview": "wrangler dev --remote"
   },
   "dependencies": {
-    "@cloudflare/kv-asset-handler": "^0.3.0"
+    "@cloudflare/kv-asset-handler": "^0.3.4"
   },
   "devDependencies": {
-    "wrangler": "^3.0.0"
+    "wrangler": "^3.78.0"
   },
   "engines": {
     "node": ">=18.0.0"
