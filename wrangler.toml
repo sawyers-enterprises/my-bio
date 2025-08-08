@@ -12,18 +12,17 @@ name = "louie-sawyer-portfolio-dev"
 [vars]
 ENVIRONMENT = "production"
 
-# Routes configuration - Supporting Louie's domains
-routes = [
-  { pattern = "louie.sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
-  { pattern = "louie.sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" },
-  { pattern = "sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
-  { pattern = "sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" }
-]
-
 # Static assets configuration for Workers Sites
 [site]
 bucket = "./frontend/build"
-entry-point = "./worker"
+
+# Routes configuration - Supporting Louie's domains (commented out for initial deployment)
+# routes = [
+#   { pattern = "louie.sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
+#   { pattern = "louie.sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" },
+#   { pattern = "sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
+#   { pattern = "sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" }
+# ]
 
 # KV namespaces for data storage (if needed)
 # [[kv_namespaces]]
