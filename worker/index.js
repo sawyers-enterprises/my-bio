@@ -1,7 +1,7 @@
 // Cloudflare Worker for Louie Sawyer Portfolio
 // Handles both frontend serving and backend API endpoints
 
-import { getAssetFromKV } from '@cloudflare/kv-asset-handler';
+import { getAssetFromKV, serveSinglePageApp } from '@cloudflare/kv-asset-handler';
 
 // Contact form submission handler
 async function handleContactSubmission(request, env) {
@@ -159,42 +159,54 @@ export default {
       }
 
       // Serve React frontend static files
+      const options = {
+        // Handle React Router - serve index.html for non-asset routes
+        mapRequestToAsset: serveSinglePageApp,
+      };
+
       return await getAssetFromKV(
         {
           request,
           waitUntil: ctx.waitUntil.bind(ctx),
         },
-        {
-          // Configure asset handling
-          mapRequestToAsset: (request) => {
-            const parsedUrl = new URL(request.url);
-            
-            // Handle React Router - serve index.html for non-asset routes
-            if (!parsedUrl.pathname.includes('.') && !parsedUrl.pathname.startsWith('/api/')) {
-              return new Request(`${parsedUrl.origin}/index.html`, request);
-            }
-            
-            return request;
-          },
-        }
+        options
       );
 
     } catch (e) {
       console.error('Worker error:', e);
       
       // If asset not found, serve index.html (React Router fallback)
-      if (e.status === 404) {
-        try {
-          return await getAssetFromKV({
-            request: new Request(`${url.origin}/index.html`, request),
-            waitUntil: ctx.waitUntil.bind(ctx),
-          });
-        } catch (assetError) {
-          return new Response('Page not found', { status: 404 });
-        }
+      try {
+        return await getAssetFromKV({
+          request: new Request(`${url.origin}/index.html`, request),
+          waitUntil: ctx.waitUntil.bind(ctx),
+        });
+      } catch (assetError) {
+        return new Response(`
+          <!DOCTYPE html>
+          <html>
+            <head>
+              <title>Louie Sawyer - Infrastructure Engineer</title>
+              <style>
+                body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; 
+                       padding: 40px; text-align: center; background: #f5f5f5; }
+                .error { background: white; padding: 40px; border-radius: 8px; 
+                        box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 400px; 
+                        margin: 0 auto; }
+              </style>
+            </head>
+            <body>
+              <div class="error">
+                <h1>Portfolio Loading...</h1>
+                <p>Please wait while we prepare the site.</p>
+              </div>
+            </body>
+          </html>
+        `, { 
+          status: 200,
+          headers: { 'Content-Type': 'text/html' }
+        });
       }
-
-      return new Response('Internal Server Error', { status: 500 });
     }
   },
 };
