@@ -29,10 +29,12 @@ bucket = "./frontend/build"
 # Worker script configuration
 main = "./worker/index.js"
 
-# Routes configuration
+# Routes configuration - Supporting Louie's domains
 routes = [
-  { pattern = "louiesawyer.com/*", zone_name = "louiesawyer.com" },
-  { pattern = "www.louiesawyer.com/*", zone_name = "louiesawyer.com" }
+  { pattern = "louie.sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
+  { pattern = "louie.sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" },
+  { pattern = "sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
+  { pattern = "sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" }
 ]
 
 # Build configuration
