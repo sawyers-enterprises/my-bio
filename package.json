@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Cloudflare Worker for Louie Sawyer Portfolio",
   "main": "worker/index.js",
+  "license": "MIT",
   "scripts": {
     "build": "cd frontend && yarn build",
     "deploy": "wrangler deploy",
