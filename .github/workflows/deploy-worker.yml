@@ -93,11 +93,11 @@ jobs:
           echo "=== Deploying from directory ==="
           pwd
           
-          echo "=== Final wrangler config (ROUTES UNCOMMENTED!) ==="
+          echo "=== Final wrangler config (MODERNIZED) ==="
           cat wrangler.toml
           
-          echo "=== Running wrangler deploy ==="
-          wrangler deploy --compatibility-date 2024-01-01
+          echo "=== Running wrangler deploy with --no-interactive ==="
+          wrangler deploy --no-interactive --compatibility-date 2024-01-01
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
