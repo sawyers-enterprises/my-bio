@@ -2,19 +2,21 @@ name = "louie-sawyer-portfolio"
 compatibility_date = "2024-01-01" 
 main = "./worker/index-simple.js"
 
-# Environment variables for the worker
-[vars]
-ENVIRONMENT = "production"
+# Skip workers.dev entirely - only use custom domains
+workers_dev = false
 
-# Static assets configuration for Workers Sites
-[site]
-bucket = "./frontend/build"
-
-# Routes for custom domains - UNCOMMENTED!
+# Routes for custom domains - TOP LEVEL
 routes = [
   { pattern = "louie.sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
   { pattern = "louie.sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" }
 ]
+
+# Environment variables for the worker
+[vars]
+ENVIRONMENT = "production"
+
+# Modern static assets configuration
+assets = { directory = "./frontend/build" }
 
 # KV namespaces for data storage (if needed)
 # [[kv_namespaces]]
