@@ -6,9 +6,13 @@ main = "./worker/index-simple.js"
 workers_dev = false
 
 # Routes for custom domains - TOP LEVEL
+# Primary subdomain routes for louie.domain format
 routes = [
   { pattern = "louie.sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
-  { pattern = "louie.sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" }
+  { pattern = "louie.sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" },
+  # Optional: Handle root domain redirects to subdomain
+  { pattern = "sawyer-enterprises.co.uk/*", zone_name = "sawyer-enterprises.co.uk" },
+  { pattern = "sawyer-enterprises.uk/*", zone_name = "sawyer-enterprises.uk" }
 ]
 
 # Environment variables for the worker
