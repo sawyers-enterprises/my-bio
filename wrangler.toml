@@ -5,7 +5,7 @@ main = "./worker/index-simple.js"
 # Skip workers.dev entirely - only use custom domains
 workers_dev = false
 
-# Routes for custom domains - CORRECTED TO PLURAL "SAWYERS"
+# Routes for custom domains
 routes = [
   { pattern = "louie.sawyers-enterprises.co.uk/*", zone_name = "sawyers-enterprises.co.uk" },
   { pattern = "louie.sawyers-enterprises.uk/*", zone_name = "sawyers-enterprises.uk" },
@@ -17,17 +17,13 @@ routes = [
 [vars]
 ENVIRONMENT = "production"
 
-# Use legacy site configuration that was working in deployment
+# Workers Sites configuration with explicit KV namespace
 [site]
 bucket = "./frontend/build"
+entry-point = "worker"
 
-# KV namespaces for data storage (if needed)
-# [[kv_namespaces]]
-# binding = "PORTFOLIO_KV"
-# id = "your-kv-namespace-id"
-
-# D1 database binding (if needed)
-# [[d1_databases]]
-# binding = "PORTFOLIO_DB"
-# database_name = "portfolio-database"
-# database_id = "your-database-id"
+# Explicit KV namespace binding for Workers Sites
+[[kv_namespaces]]
+binding = "__STATIC_CONTENT"
+preview_id = "louie-sawyer-portfolio-preview"
+id = "louie-sawyer-portfolio-assets"
