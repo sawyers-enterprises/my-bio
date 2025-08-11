@@ -86,20 +86,17 @@ jobs:
           echo "=== Wrangler config ==="
           cat wrangler.toml
           
-      # Deploy to Cloudflare Workers with custom domains
-      - name: Deploy Worker to Custom Domains
+      # Deploy updated worker with better asset handling
+      - name: Deploy Worker with Asset Fix
         working-directory: .
         run: |
-          echo "=== Deploying from directory ==="
-          pwd
+          echo "=== Deploying updated worker ==="
           
-          echo "=== Final wrangler config ==="
+          echo "=== Current wrangler config ==="
           cat wrangler.toml
           
-          echo "=== Checking available zones first ==="
-          curl -X GET "https://api.cloudflare.com/client/v4/zones" \
-            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
-            -H "Content-Type: application/json" | jq '.result[] | {name: .name, id: .id}' || echo "Zone check failed"
+          echo "=== Checking frontend/build contents ==="
+          ls -la frontend/build/ || echo "Build dir missing"
           
           echo "=== Running wrangler deploy ==="
           wrangler deploy --compatibility-date 2024-01-01
