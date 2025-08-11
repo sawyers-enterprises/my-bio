@@ -35,8 +35,8 @@ async function handleContactSubmission(request, env) {
 
     // Send email notification (using Resend or SendGrid)
     const emailContent = {
-      to: 'louie@sawyer-enterprises.co.uk', // Louie's business email
-      from: 'noreply@sawyer-enterprises.co.uk', // Your domain
+      to: 'louie@sawyers-enterprises.co.uk', // Louie's business email - CORRECTED TO PLURAL
+      from: 'noreply@sawyers-enterprises.co.uk', // Your domain - CORRECTED TO PLURAL
       subject: `Portfolio Contact: ${subject}`,
       html: `
         <h2>New Portfolio Contact Form Submission</h2>
