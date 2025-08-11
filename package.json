@@ -2,7 +2,7 @@
   "name": "louie-sawyer-portfolio-worker",
   "version": "1.0.0",
   "description": "Cloudflare Worker for Louie Sawyer Portfolio",
-  "main": "worker/index.js",
+  "main": "worker/index-simple.js",
   "license": "MIT",
   "scripts": {
     "build": "cd frontend && yarn build",
@@ -14,7 +14,7 @@
     "@cloudflare/kv-asset-handler": "^0.3.4"
   },
   "devDependencies": {
-    "wrangler": "^3.78.0"
+    "wrangler": "^4.28.1"
   },
   "engines": {
     "node": ">=18.0.0"
