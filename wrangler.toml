@@ -17,5 +17,7 @@ routes = [
 [vars]
 ENVIRONMENT = "production"
 
-# Modern assets configuration (replaces legacy [site] config)
-assets = { directory = "./frontend/build" }
+# Workers Sites configuration - this automatically creates and binds a KV namespace
+[site]
+bucket = "./frontend/build"
+entry-point = "worker"
