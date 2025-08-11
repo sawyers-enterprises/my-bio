@@ -80,22 +80,27 @@ export default {
       });
     }
 
-    // For non-API routes, try to serve static files or fallback
+    // For non-API routes, try to serve static files FIRST
     try {
-      // Import the KV asset handler dynamically to avoid issues
+      // Import the KV asset handler
       const { getAssetFromKV, serveSinglePageApp } = await import('@cloudflare/kv-asset-handler');
       
+      // Try to serve the React app
       return await getAssetFromKV({
         request,
         waitUntil: ctx.waitUntil.bind(ctx),
       }, {
         mapRequestToAsset: serveSinglePageApp,
+        cacheControl: {
+          browserTTL: 60 * 60 * 24, // 24 hours
+          edgeTTL: 60 * 60 * 24 * 7, // 7 days
+        },
       });
       
     } catch (e) {
       console.error('Asset serving error:', e);
       
-      // Simple fallback HTML page
+      // Only show fallback HTML if we really can't serve assets
       return new Response(`
         <!DOCTYPE html>
         <html lang="en">
@@ -113,8 +118,9 @@ export default {
                 box-shadow: 0 2px 10px rgba(0,0,0,0.1); max-width: 600px; 
                 margin: 40px auto; 
               }
-              .loading { color: #666; }
+              .error { color: #e74c3c; }
               h1 { color: #333; margin-bottom: 20px; }
+              .debug { background: #f8f9fa; padding: 20px; margin: 20px 0; text-align: left; }
             </style>
           </head>
           <body>
@@ -122,17 +128,22 @@ export default {
               <h1>Louie Sawyer</h1>
               <p><strong>Infrastructure Engineer</strong></p>
               <p>12+ Years Experience</p>
-              <div class="loading">
-                <p>Portfolio is loading...</p>
-                <p>If this persists, the static assets are still being deployed.</p>
+              <div class="error">
+                <p><strong>React App Failed to Load</strong></p>
+                <p>The static assets couldn't be served properly.</p>
               </div>
-              <hr style="margin: 30px 0;">
-              <p><small>API Status: <a href="/api/health">Health Check</a></small></p>
+              <div class="debug">
+                <h3>Debug Info:</h3>
+                <p><strong>Error:</strong> ${e.message}</p>
+                <p><strong>URL:</strong> ${url.pathname}</p>
+                <p><strong>Worker:</strong> Running correctly</p>
+                <p><strong>API Status:</strong> <a href="/api/health">Health Check</a></p>
+              </div>
             </div>
           </body>
         </html>
       `, { 
-        status: 200,
+        status: 500,
         headers: { 'Content-Type': 'text/html' }
       });
     }
