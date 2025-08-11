@@ -91,15 +91,14 @@ jobs:
           echo "=== Wrangler config ==="
           cat wrangler.toml
           
-      # Deploy updated worker with better asset handling
-      - name: Deploy Worker with Asset Fix
+      # Deploy updated worker with KV namespace creation
+      - name: Deploy Worker with KV Namespace
         working-directory: .
         run: |
-          echo "=== Deploying updated worker ==="
+          echo "=== Creating KV namespace for Workers Sites ==="
+          wrangler kv namespace create "__STATIC_CONTENT" || echo "Namespace might already exist"
           
-          echo "=== Checking node_modules ==="
-          ls -la node_modules/@cloudflare/ || echo "Cloudflare modules not found"
-          
+          echo "=== Deploying worker ==="
           echo "=== Current wrangler config ==="
           cat wrangler.toml
           
