@@ -91,12 +91,20 @@ jobs:
           echo "=== Wrangler config ==="
           cat wrangler.toml
           
-      # Deploy updated worker with KV namespace creation
-      - name: Deploy Worker with KV Namespace
+      # Deploy updated worker with KV namespace creation and secrets
+      - name: Deploy Worker with KV Namespace and Email Integration
         working-directory: .
         run: |
           echo "=== Creating KV namespace for Workers Sites ==="
           wrangler kv namespace create "__STATIC_CONTENT" || echo "Namespace might already exist"
+          
+          echo "=== Setting up secrets ==="
+          if [ ! -z "$RESEND_API_KEY" ]; then
+            echo "$RESEND_API_KEY" | wrangler secret put RESEND_API_KEY
+            echo "RESEND_API_KEY secret configured"
+          else
+            echo "Warning: RESEND_API_KEY not provided"
+          fi
           
           echo "=== Deploying worker ==="
           echo "=== Current wrangler config ==="
