@@ -97,6 +97,9 @@ jobs:
         run: |
           echo "=== Deploying updated worker ==="
           
+          echo "=== Checking node_modules ==="
+          ls -la node_modules/@cloudflare/ || echo "Cloudflare modules not found"
+          
           echo "=== Current wrangler config ==="
           cat wrangler.toml
           
