@@ -91,33 +91,25 @@ jobs:
           echo "=== Wrangler config ==="
           cat wrangler.toml
           
-      # Deploy updated worker with KV namespace creation and secrets
-      - name: Deploy Worker with KV Namespace and Email Integration
+      # Deploy worker with automatic KV namespace binding
+      - name: Deploy Worker with Workers Sites
         working-directory: .
         run: |
-          echo "=== Setting up secrets ==="
-          if [ ! -z "$RESEND_API_KEY" ]; then
-            echo "$RESEND_API_KEY" | wrangler secret put RESEND_API_KEY
-            echo "RESEND_API_KEY secret configured"
-          else
-            echo "Warning: RESEND_API_KEY not provided"
-          fi
-          
           echo "=== Current wrangler config ==="
           cat wrangler.toml
           
-          echo "=== Checking frontend/build contents ==="
+          echo "=== Verifying frontend build ==="
           ls -la frontend/build/ || echo "Build dir missing"
+          echo "Build files count: $(find frontend/build -type f | wc -l)"
           
-          echo "=== Deploying worker with Workers Sites ==="
-          # For Workers Sites, wrangler automatically creates and binds the __STATIC_CONTENT KV namespace
+          echo "=== Deploying with Workers Sites ==="
           wrangler deploy --compatibility-date 2024-01-01
           
-          echo "=== Deployment completed ==="
+          echo "=== Verifying deployment ==="
+          wrangler whoami
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           
       - name: Deployment Success
         run: |
