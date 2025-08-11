@@ -16,7 +16,6 @@ routes = [
 # Environment variables for the worker
 [vars]
 ENVIRONMENT = "production"
-RESEND_API_KEY = ""
 
 # Workers Sites configuration - this will automatically create and bind __STATIC_CONTENT KV namespace on deployment
 [site]
