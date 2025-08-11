@@ -17,13 +17,6 @@ routes = [
 [vars]
 ENVIRONMENT = "production"
 
-# Workers Sites configuration - this automatically creates and binds a KV namespace
+# Workers Sites configuration - this will automatically create and bind __STATIC_CONTENT KV namespace on deployment
 [site]
 bucket = "./frontend/build"
-
-# Explicit KV namespace binding for Workers Sites
-# This will be automatically created by wrangler on first deployment
-[[kv_namespaces]]
-binding = "__STATIC_CONTENT"
-preview_id = ""
-id = ""
