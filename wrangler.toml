@@ -17,13 +17,5 @@ routes = [
 [vars]
 ENVIRONMENT = "production"
 
-# Workers Sites configuration with explicit KV namespace
-[site]
-bucket = "./frontend/build"
-entry-point = "worker"
-
-# Explicit KV namespace binding for Workers Sites
-[[kv_namespaces]]
-binding = "__STATIC_CONTENT"
-preview_id = "louie-sawyer-portfolio-preview"
-id = "louie-sawyer-portfolio-assets"
+# Modern assets configuration (replaces legacy [site] config)
+assets = { directory = "./frontend/build" }
