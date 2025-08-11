@@ -49,7 +49,7 @@ jobs:
       # Install worker dependencies
       - name: Install Worker Dependencies
         run: |
-          yarn install --frozen-lockfile
+          yarn install
           
       # Verify wrangler installation
       - name: Verify Wrangler
