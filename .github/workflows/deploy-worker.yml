@@ -93,8 +93,13 @@ jobs:
           echo "=== Deploying from directory ==="
           pwd
           
-          echo "=== Final wrangler config (MODERNIZED) ==="
+          echo "=== Final wrangler config ==="
           cat wrangler.toml
+          
+          echo "=== Checking available zones first ==="
+          curl -X GET "https://api.cloudflare.com/client/v4/zones" \
+            -H "Authorization: Bearer $CLOUDFLARE_API_TOKEN" \
+            -H "Content-Type: application/json" | jq '.result[] | {name: .name, id: .id}' || echo "Zone check failed"
           
           echo "=== Running wrangler deploy ==="
           wrangler deploy --compatibility-date 2024-01-01
