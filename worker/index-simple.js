@@ -1,7 +1,7 @@
 // Cloudflare Workers Site with proper KV asset handler
 import { getAssetFromKV, serveSinglePageApp } from '@cloudflare/kv-asset-handler';
 
-// Contact form submission handler
+// Contact form submission handler with Resend integration
 async function handleContactSubmission(request, env) {
   try {
     const formData = await request.json();
@@ -31,14 +31,129 @@ async function handleContactSubmission(request, env) {
       });
     }
 
-    // For now, just return success (email integration can be added later)
-    return new Response(JSON.stringify({ 
-      success: true, 
-      message: 'Thank you for your message! We will get back to you soon.' 
-    }), {
-      status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    });
+    // Send email via Resend API
+    if (env.RESEND_API_KEY) {
+      try {
+        // Prepare email template
+        const emailHtml = `
+          <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <title>Contact Form Submission - Louie Sawyer Portfolio</title>
+            <style>
+              body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px; }
+              .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 8px; margin-bottom: 20px; text-align: center; }
+              .content { background: #ffffff; padding: 30px; border: 1px solid #e1e5e9; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+              .field { margin-bottom: 20px; }
+              .label { font-weight: 600; color: #4a5568; margin-bottom: 8px; display: block; }
+              .value { padding: 12px; background: #f7fafc; border-left: 4px solid #667eea; border-radius: 4px; }
+              .message-content { white-space: pre-wrap; font-family: inherit; }
+              .footer { margin-top: 30px; padding-top: 20px; border-top: 1px solid #e1e5e9; color: #718096; font-size: 14px; }
+            </style>
+          </head>
+          <body>
+            <div class="header">
+              <h1 style="margin: 0; font-size: 24px;">New Contact Form Submission</h1>
+              <p style="margin: 10px 0 0 0; opacity: 0.9;">Portfolio Website Contact Form</p>
+            </div>
+            <div class="content">
+              <div class="field">
+                <span class="label">From:</span>
+                <div class="value"><strong>${name}</strong> &lt;${email}&gt;</div>
+              </div>
+              ${company ? `<div class="field">
+                <span class="label">Company:</span>
+                <div class="value">${company}</div>
+              </div>` : ''}
+              <div class="field">
+                <span class="label">Subject:</span>
+                <div class="value">${subject}</div>
+              </div>
+              <div class="field">
+                <span class="label">Message:</span>
+                <div class="value message-content">${message}</div>
+              </div>
+              <div class="footer">
+                <p><strong>Submitted:</strong> ${new Date().toLocaleString('en-GB', { 
+                  timeZone: 'Europe/London',
+                  year: 'numeric',
+                  month: 'long', 
+                  day: 'numeric',
+                  hour: '2-digit',
+                  minute: '2-digit'
+                })}</p>
+                <p><strong>From:</strong> Portfolio Contact Form (sawyers-enterprises.co.uk)</p>
+              </div>
+            </div>
+          </body>
+          </html>
+        `;
+
+        // Send email via Resend API
+        const resendResponse = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${env.RESEND_API_KEY}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            from: 'noreply@sawyers-enterprises.co.uk',
+            to: ['louie@sawyers-enterprises.co.uk'],
+            subject: `Portfolio Contact: ${subject}`,
+            html: emailHtml,
+            reply_to: email
+          }),
+        });
+
+        if (resendResponse.ok) {
+          const resendData = await resendResponse.json();
+          console.log('Email sent successfully:', resendData.id);
+          
+          return new Response(JSON.stringify({ 
+            success: true, 
+            message: 'Thank you for your message! I will get back to you soon.',
+            emailId: resendData.id
+          }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        } else {
+          const errorData = await resendResponse.json();
+          console.error('Resend API error:', errorData);
+          
+          // Still return success to user, but log the error
+          return new Response(JSON.stringify({ 
+            success: true, 
+            message: 'Thank you for your message! I will get back to you soon.' 
+          }), {
+            status: 200,
+            headers: { 'Content-Type': 'application/json' }
+          });
+        }
+
+      } catch (emailError) {
+        console.error('Email sending error:', emailError);
+        
+        // Return success to user even if email fails
+        return new Response(JSON.stringify({ 
+          success: true, 
+          message: 'Thank you for your message! I will get back to you soon.' 
+        }), {
+          status: 200,
+          headers: { 'Content-Type': 'application/json' }
+        });
+      }
+    } else {
+      // No API key configured, just return success
+      return new Response(JSON.stringify({ 
+        success: true, 
+        message: 'Thank you for your message! I will get back to you soon.' 
+      }), {
+        status: 200,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    }
 
   } catch (error) {
     console.error('Contact form error:', error);
