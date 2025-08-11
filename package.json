@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "cd frontend && yarn build",
+    "build:worker": "wrangler deploy --dry-run",
     "deploy": "wrangler deploy",
     "dev": "wrangler dev",
     "preview": "wrangler dev --remote"
