@@ -46,6 +46,11 @@ jobs:
         run: |
           npm install -g wrangler@latest
           
+      # Install worker dependencies
+      - name: Install Worker Dependencies
+        run: |
+          yarn install --frozen-lockfile
+          
       # Verify wrangler installation
       - name: Verify Wrangler
         run: |
