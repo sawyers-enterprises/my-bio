@@ -20,4 +20,3 @@ ENVIRONMENT = "production"
 # Workers Sites configuration - this automatically creates and binds a KV namespace
 [site]
 bucket = "./frontend/build"
-entry-point = "worker"
