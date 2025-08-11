@@ -111,8 +111,13 @@ export default {
     }
 
     // For all non-API routes, let Cloudflare serve static assets
-    // This should not be reached as Cloudflare handles static assets automatically
-    // with the modern assets configuration
-    return env.ASSETS.fetch(request);
+    // Using env.ASSETS to fetch from the configured assets directory
+    try {
+      return await env.ASSETS.fetch(request);
+    } catch (error) {
+      // If asset not found or error, serve a basic fallback
+      console.error('Asset fetch error:', error);
+      return new Response('Asset not found', { status: 404 });
+    }
   },
 };
