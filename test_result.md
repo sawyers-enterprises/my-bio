@@ -198,5 +198,7 @@ test_plan:
 agent_communication:
   - agent: "main"
     message: "Fixed KV namespace binding issue by switching from legacy Workers Sites [site] config to modern assets configuration. Removed @cloudflare/kv-asset-handler dependency. React build completed successfully. Ready for deployment testing."
+  - agent: "main"
+    message: "Reverted to Workers Sites [site] configuration with KV asset handler after modern assets config had env.ASSETS undefined error. Fixed wrangler.toml deprecated entry-point field. Configuration now working correctly with proper KV namespace binding."
   - agent: "testing"
     message: "BACKEND TESTING COMPLETE: Cloudflare Worker implementation is 100% functional when tested locally. All API endpoints (/api/health, /api/contact) work perfectly with proper validation and CORS. CRITICAL ISSUE: Production URL serves FastAPI backend instead of Cloudflare Worker. Need to deploy worker to production or fix routing configuration."
