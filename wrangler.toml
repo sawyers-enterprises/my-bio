@@ -17,8 +17,9 @@ routes = [
 [vars]
 ENVIRONMENT = "production"
 
-# Modern static assets configuration
-assets = { directory = "./frontend/build" }
+# Use legacy site configuration that was working in deployment
+[site]
+bucket = "./frontend/build"
 
 # KV namespaces for data storage (if needed)
 # [[kv_namespaces]]
