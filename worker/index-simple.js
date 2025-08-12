@@ -232,6 +232,7 @@ export default {
         request,
         waitUntil: (promise) => ctx.waitUntil(promise),
       }, {
+        ASSET_NAMESPACE: env.__STATIC_CONTENT,
         mapRequestToAsset: serveSinglePageApp,
         cacheControl: {
           browserTTL: 60 * 60 * 24, // 24 hours
@@ -246,6 +247,8 @@ export default {
         return await getAssetFromKV({
           request: new Request(`${url.origin}/index.html`, request),
           waitUntil: (promise) => ctx.waitUntil(promise),
+        }, {
+          ASSET_NAMESPACE: env.__STATIC_CONTENT,
         });
       } catch (fallbackError) {
         console.error('Fallback asset error:', fallbackError);
