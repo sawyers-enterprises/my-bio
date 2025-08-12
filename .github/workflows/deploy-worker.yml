@@ -102,14 +102,14 @@ jobs:
           ls -la frontend/build/ || echo "Build dir missing"
           echo "Build files count: $(find frontend/build -type f | wc -l)"
           
-          echo "=== Deploying with Workers Sites ==="
+          echo "=== Deploying with Workers Sites (wrangler will auto-create KV namespace) ==="
           wrangler deploy --compatibility-date 2024-01-01
           
-          echo "=== Verifying deployment ==="
-          wrangler whoami
+          echo "=== Deployment completed ==="
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           
       - name: Deployment Success
         run: |
