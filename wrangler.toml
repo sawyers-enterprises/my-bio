@@ -17,12 +17,6 @@ routes = [
 [vars]
 ENVIRONMENT = "production"
 
-# Workers Sites configuration
+# Workers Sites configuration - let wrangler auto-manage the KV namespace
 [site]
 bucket = "./frontend/build"
-
-# Explicit KV namespace binding - using the actual namespace from your dashboard
-[[kv_namespaces]]
-binding = "__STATIC_CONTENT"
-id = "8f88e14f829c4cca84dcd374a1311e"
-preview_id = "8f88e14f829c4cca84dcd374a1311e"
