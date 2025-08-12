@@ -20,4 +20,3 @@ ENVIRONMENT = "production"
 # Workers Sites configuration - automatically creates and binds __STATIC_CONTENT KV namespace
 [site]
 bucket = "./frontend/build"
-entry-point = "./worker"
